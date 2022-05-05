@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Meal Calculation</title>
+    <!-- Bootstrap CSS CDN Link -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+      integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3"
+      crossorigin="anonymous"
+    />
+  </head>
+  <body>
+    <section class="container">
+      <div class="text-center my-3">
+        <h3>Meal Calculation</h3>
+      </div>
+      <div class="row row-cols-1 row-cols-md-2 g-4">
+        <div class="col border-end border-warning border-5">
+          <div>
+            <label for="total-joma">Total Joma Taka : </label>
+            <input id="total-joma" type="text" class="form-control" />
+          </div>
+          <div>
+            <label for="total-bazar">Total Bazar Khoroj : </label>
+            <input id="total-bazar" type="text" class="form-control" />
+          </div>
+          <div>
+            <label for="total-meal">Total Meal : </label>
+            <input id="total-meal" type="text" class="form-control" />
+          </div>
+        </div>
+
+        <div class="col mt-md-5 ps-md-5">
+          <div>
+            <h5>Taka Ase : <span id="taka-ase">00</span> Taka</h5>
+          </div>
+          <div>
+            <h4>Meal Rate : <span id="meal-rate">00</span> Taka</h4>
+          </div>
+          <!-- <div>
+            <h4>Meal Rate Round : <span id="Meal-rate-round">00</span> Taka</h4>
+          </div> -->
+        </div>
+
+        <div>
+          <button onclick="mealRate()" class="btn form-control btn-success">
+            Meal Rate
+          </button>
+        </div>
+      </div>
+
+      <div class="my-4">
+        <table class="table table-striped">
+          <thead>
+            <tr>
+              <th scope="col">#No</th>
+              <th scope="col">Name</th>
+              <th scope="col">Meal</th>
+              <th scope="col">Joma(tk)</th>
+              <th scope="col">Khoroj(tk)</th>
+              <th scope="col">Dibe(tk)</th>
+              <th scope="col">Pabe(tk)</th>
+            </tr>
+          </thead>
+          <tbody id="member-info">
+            <!-- <tr>
+              <th scope="row">1</th>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+              <td>Mark</td>
+              <td>Otto</td>
+              <td>@mdo</td>
+            </tr>             -->
+          </tbody>
+        </table>
+        <div class="w-75 mx-auto">
+          <div class="row row-cols-1 row-cols-md-3 mt-5">
+            <div>
+              <label for="name">Name : </label>
+              <input type="text" id="name" placeholder="Enter Name" />
+            </div>
+
+            <div>
+              <label for="meal">Meal : </label>
+              <input type="text" id="meal" placeholder="Enter Meal" />
+            </div>
+
+            <div>
+              <label for="joma-taka">Joma(tk) : </label>
+              <input type="text" id="joma-taka" placeholder="Enter taka joma" />
+            </div>
+          </div>
+          <div class="text-center my-4">
+            <button
+              onclick="addMember()"
+              id="add-member"
+              class="btn btn-primary"
+            >
+              Add member
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <footer class="text-center">
+      <p>
+        © copyright
+        <a target="_blank" href="https://github.com/rashidul191">Rashidul</a>
+        <span id="year-set"></span>
+      </p>
+    </footer>
+
+    <!-- JavaScript Custom Link -->
+    <script src="js/app.js"></script>
+  </body>
+</html>
