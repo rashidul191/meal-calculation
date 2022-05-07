@@ -1,21 +1,17 @@
-// total joma
-const totalJomaFun = () => {
-  const totalJoma = document.getElementById("total-joma");
-  const totalJomaNumber = parseFloat(totalJoma.value);
-  return totalJomaNumber;
-};
-// total bazar
-const totalBazarFun = () => {
-  const totalBazar = document.getElementById("total-bazar");
-  const totalBazarNumber = parseFloat(totalBazar.value);
-  return totalBazarNumber;
-};
+const errorMsg = document.getElementById("error-meg");
+errorMsg.style.display = "none";
 
-// total Meal rate
-const totalMealFun = () => {
-  const totalMeal = document.getElementById("total-meal");
-  const totalMealNumber = parseFloat(totalMeal.value);
-  return totalMealNumber;
+// total joma
+const totalJomaAndKhoroj = (id) => {
+  const totalJomaAndKhoroj = document.getElementById("total-" + id).value;
+  const totalJomaAndKhorojNumber = parseFloat(totalJomaAndKhoroj);
+  if (isNaN(totalJomaAndKhorojNumber)) {
+    errorMsg.style.display = "block";
+    return false;
+  } else {
+    errorMsg.style.display = "none";
+    return totalJomaAndKhorojNumber;
+  }
 };
 
 //
@@ -25,18 +21,19 @@ const setMealRate = document.getElementById("meal-rate");
 
 // Meal Rate calculator
 const mealRate = () => {
-  const totalJoma = totalJomaFun();
-  const totalBazar = totalBazarFun();
-  const totalMeal = totalMealFun();
-
+  const totalJoma = totalJomaAndKhoroj("joma");
+  const totalBazar = totalJomaAndKhoroj("bazar");
+  const totalMeal = totalJomaAndKhoroj("meal");
   const takaAse = totalJoma - totalBazar;
   setTakaAse.innerText = takaAse;
 
   const totalMealRate = totalBazar / totalMeal;
-   fixedMealRate = totalMealRate.toFixed(3);
+  fixedMealRate = totalMealRate.toFixed(3);
   setMealRate.innerText = fixedMealRate;
-//   MealRateRound = Math.round(totalMealRate);
-//   setMealRateRound.innerText = MealRateRound;
+
+  // set date and time
+  const date = document.getElementById("date");
+  document.getElementById("set-date").innerText = date.value;
 };
 
 // get member information
@@ -45,42 +42,44 @@ const meal = document.getElementById("meal");
 const jomaTaka = document.getElementById("joma-taka");
 const tbody = document.getElementById("member-info");
 let count = 0;
+
 // add new member
 const addMember = () => {
   count++;
   const memberName = name.value;
-  const memberMeal = parseInt(meal.value);
   const memberJomaTaka = parseFloat(jomaTaka.value);
-  //console.log(memberJomaTaka, memberMeal, memberName , count);
+  const memberMeal = parseInt(meal.value);
 
-  //console.log(fixedMealRate);
+  if (isNaN(memberMeal) || isNaN(memberJomaTaka)) {
+    errorMsg.style.display = "block";
+  }
+  errorMsg.style.display = "none";
 
-  const memberTotalKhoroj = Math.round(fixedMealRate * memberMeal);
+  const memberTotalKhoroj = fixedMealRate * memberMeal;
   const memberTakaPabeDibe = memberJomaTaka - memberTotalKhoroj;
   let pabe = 0;
   let dibe = 0;
   if (memberTakaPabeDibe >= 0) {
     pabe = memberTakaPabeDibe;
-  }else{
-      dibe = memberTakaPabeDibe * -1;
+  } else {
+    dibe = memberTakaPabeDibe * -1;
   }
   const tr = document.createElement("tr");
   tr.innerHTML = `
     <th scope="row">${count}</th>
-    <td class="fw-bold">${memberName}</td>
-    <td>${memberMeal}</td>
+    <td class="fw-bold">${memberName}</td>  
     <td>${memberJomaTaka}</td>
-    <td>${memberTotalKhoroj}</td>
-    <td class="text-danger fw-bold">${dibe}</td>
-    <td class="text-success fw-bold">${pabe}</td>
+    <td>${memberTotalKhoroj.toFixed(2)}</td>
+    <td>${memberMeal}</td>
+    <td class="text-danger fw-bold">${Math.ceil(dibe)}</td>
+    <td class="text-success fw-bold">${Math.floor(pabe)}</td>
     `;
   tbody.appendChild(tr);
 
   // clear name , Meal, jomaTaka input filed
-  name.value = '';
-  meal.value = '';
-  jomaTaka.value = '';
-
+  name.value = "";
+  meal.value = "";
+  jomaTaka.value = "";
 };
 
 // year set
