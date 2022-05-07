@@ -46,40 +46,50 @@ let count = 0;
 // add new member
 const addMember = () => {
   count++;
+  const totalJoma = totalJomaAndKhoroj("joma");
+  const totalMeal = totalJomaAndKhoroj("meal");
   const memberName = name.value;
   const memberJomaTaka = parseFloat(jomaTaka.value);
   const memberMeal = parseInt(meal.value);
-
-  if (isNaN(memberMeal) || isNaN(memberJomaTaka)) {
-    errorMsg.style.display = "block";
-  }
-  errorMsg.style.display = "none";
-
-  const memberTotalKhoroj = fixedMealRate * memberMeal;
-  const memberTakaPabeDibe = memberJomaTaka - memberTotalKhoroj;
   let pabe = 0;
   let dibe = 0;
-  if (memberTakaPabeDibe >= 0) {
-    pabe = memberTakaPabeDibe;
-  } else {
-    dibe = memberTakaPabeDibe * -1;
-  }
-  const tr = document.createElement("tr");
-  tr.innerHTML = `
-    <th scope="row">${count}</th>
-    <td class="fw-bold">${memberName}</td>  
-    <td>${memberJomaTaka}</td>
-    <td>${memberTotalKhoroj.toFixed(2)}</td>
-    <td>${memberMeal}</td>
-    <td class="text-danger fw-bold">${Math.ceil(dibe)}</td>
-    <td class="text-success fw-bold">${Math.floor(pabe)}</td>
-    `;
-  tbody.appendChild(tr);
 
-  // clear name , Meal, jomaTaka input filed
-  name.value = "";
-  meal.value = "";
-  jomaTaka.value = "";
+  if (totalJoma > memberJomaTaka && totalMeal > memberMeal) {
+    const memberTotalKhoroj = fixedMealRate * memberMeal;
+    const memberTakaPabeDibe = memberJomaTaka - memberTotalKhoroj;
+
+    if (memberTakaPabeDibe >= 0) {
+      pabe = memberTakaPabeDibe;
+    } else {
+      dibe = memberTakaPabeDibe * -1;
+    }
+
+
+    const tr = document.createElement("tr");
+    tr.innerHTML = `
+      <th scope="row">${count}</th>
+      <td class="fw-bold">${memberName}</td>  
+      <td>${memberJomaTaka}</td>
+      <td>${memberTotalKhoroj.toFixed(2)}</td>
+      <td>${memberMeal}</td>
+      <td class="text-danger fw-bold">${Math.ceil(dibe)}</td>
+      <td class="text-success fw-bold">${Math.floor(pabe)}</td>
+      `;
+    tbody.appendChild(tr);
+  
+    // clear name , Meal, jomaTaka input filed
+    name.value = "";
+    meal.value = "";
+    jomaTaka.value = "";
+
+
+
+  }else{
+    errorMsg.style.display = "block";
+    return;
+  }
+
+  
 };
 
 // year set
