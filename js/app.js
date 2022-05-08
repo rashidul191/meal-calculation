@@ -1,20 +1,25 @@
+// error massage
 const errorMsg = document.getElementById("error-meg");
-errorMsg.style.display = "none";
 
 // total joma
 const totalJomaAndKhoroj = (id) => {
   const totalJomaAndKhoroj = document.getElementById("total-" + id).value;
-  const totalJomaAndKhorojNumber = parseFloat(totalJomaAndKhoroj);
-  if (totalJomaAndKhorojNumber >= 0) {
-    errorMsg.style.display = "none";
-    return totalJomaAndKhorojNumber;
+  if (totalJomaAndKhoroj == "") {
+    errorMsg.innerText = "Error !!! input is empty, please try again";
+    return;
   } else {
-    errorMsg.style.display = "block";
-    return 0;
+    const totalJomaAndKhorojNumber = parseFloat(totalJomaAndKhoroj);
+    if (totalJomaAndKhorojNumber >= 0) {
+      errorMsg.style.display = "none";
+      return totalJomaAndKhorojNumber;
+    } else {
+      errorMsg.innerText = "Error !!! it's not a valid input, please try again";
+      return 0;
+    }
   }
 };
 
-//
+// output on meal rate and taka ase.
 const setTakaAse = document.getElementById("taka-ase");
 const setMealRate = document.getElementById("meal-rate");
 
@@ -25,7 +30,6 @@ const mealRate = () => {
   const totalMeal = totalJomaAndKhoroj("meal");
   const takaAse = totalJoma - totalBazar;
   setTakaAse.innerText = takaAse;
-
   const totalMealRate = totalBazar / totalMeal;
   fixedMealRate = totalMealRate.toFixed(2);
   setMealRate.innerText = fixedMealRate;
@@ -36,16 +40,15 @@ const mealRate = () => {
   date.value = "";
 };
 
-// get member information
-const name = document.getElementById("name");
-const meal = document.getElementById("meal");
-const jomaTaka = document.getElementById("joma-taka");
-const tbody = document.getElementById("member-info");
 let count = 0;
-
 // add new member
 const addMember = () => {
-  count++;
+  // get member information
+  const name = document.getElementById("name");
+  const jomaTaka = document.getElementById("joma-taka");
+  const meal = document.getElementById("meal");
+  const tbody = document.getElementById("member-info");
+
   const totalJoma = totalJomaAndKhoroj("joma");
   const totalMeal = totalJomaAndKhoroj("meal");
   const memberName = name.value;
@@ -53,10 +56,13 @@ const addMember = () => {
   const memberMeal = parseInt(meal.value);
   let pabe = 0;
   let dibe = 0;
-
-  if (totalJoma >= memberJomaTaka && totalMeal >= memberMeal) {
+  if (name.value == "" || jomaTaka.value == "" || meal.value == "") {
+    errorMsg.innerText = "Error!!! member info input is empty, please try again";
+    return;
+  } else if (totalJoma >= memberJomaTaka && totalMeal >= memberMeal) {
     const memberTotalKhoroj = fixedMealRate * memberMeal;
     const memberTakaPabeDibe = memberJomaTaka - memberTotalKhoroj;
+    count++;
 
     if (memberTakaPabeDibe >= 0) {
       pabe = memberTakaPabeDibe;
@@ -80,8 +86,10 @@ const addMember = () => {
     name.value = "";
     meal.value = "";
     jomaTaka.value = "";
-  } else {
-    errorMsg.style.display = "block";
+  } else {   
+    // error massage
+    const errorMsg = document.getElementById("error-meg");
+    errorMsg.innerText = "Error !!! it's not a valid input, please try again";
     return;
   }
 };
