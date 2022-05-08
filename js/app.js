@@ -5,19 +5,18 @@ errorMsg.style.display = "none";
 const totalJomaAndKhoroj = (id) => {
   const totalJomaAndKhoroj = document.getElementById("total-" + id).value;
   const totalJomaAndKhorojNumber = parseFloat(totalJomaAndKhoroj);
-  if (isNaN(totalJomaAndKhorojNumber)) {
-    errorMsg.style.display = "block";
-    return false;
-  } else {
+  if (totalJomaAndKhorojNumber >= 0) {
     errorMsg.style.display = "none";
     return totalJomaAndKhorojNumber;
+  } else {
+    errorMsg.style.display = "block";
+    return 0;
   }
 };
 
 //
 const setTakaAse = document.getElementById("taka-ase");
 const setMealRate = document.getElementById("meal-rate");
-// const setMealRateRound = document.getElementById("Meal-rate-round");
 
 // Meal Rate calculator
 const mealRate = () => {
@@ -28,12 +27,13 @@ const mealRate = () => {
   setTakaAse.innerText = takaAse;
 
   const totalMealRate = totalBazar / totalMeal;
-  fixedMealRate = totalMealRate.toFixed(3);
+  fixedMealRate = totalMealRate.toFixed(2);
   setMealRate.innerText = fixedMealRate;
 
   // set date and time
   const date = document.getElementById("date");
   document.getElementById("set-date").innerText = date.value;
+  date.value = "";
 };
 
 // get member information
@@ -54,7 +54,7 @@ const addMember = () => {
   let pabe = 0;
   let dibe = 0;
 
-  if (totalJoma > memberJomaTaka && totalMeal > memberMeal) {
+  if (totalJoma >= memberJomaTaka && totalMeal >= memberMeal) {
     const memberTotalKhoroj = fixedMealRate * memberMeal;
     const memberTakaPabeDibe = memberJomaTaka - memberTotalKhoroj;
 
@@ -63,7 +63,6 @@ const addMember = () => {
     } else {
       dibe = memberTakaPabeDibe * -1;
     }
-
 
     const tr = document.createElement("tr");
     tr.innerHTML = `
@@ -76,20 +75,15 @@ const addMember = () => {
       <td class="text-success fw-bold">${Math.floor(pabe)}</td>
       `;
     tbody.appendChild(tr);
-  
+
     // clear name , Meal, jomaTaka input filed
     name.value = "";
     meal.value = "";
     jomaTaka.value = "";
-
-
-
-  }else{
+  } else {
     errorMsg.style.display = "block";
     return;
   }
-
-  
 };
 
 // year set

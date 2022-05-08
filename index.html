@@ -13,54 +13,79 @@
       crossorigin="anonymous"
     />
   </head>
-  <body>
+  <body style="background-color: rgb(255, 254, 255)">
     <section class="container">
-      <div>
-        <h2 class="text-center text-danger" id="error-meg">Error !!! value is not a number, please try again</h2>
-      </div>
       <div class="text-center my-3">
-        <h3>Meal Calculation</h3>
+        <h3>Match <span class="text-warning">Meal Calculation</span></h3>
         <div>
           <label for="date">Date : </label>
-          <input type="date" name="date" id="date">
+          <input type="date" name="date" id="date" />
         </div>
       </div>
       <div>
         <div class="row row-cols-2 g-4 mx-auto">
           <div class="col border-end border-warning border-5">
             <div>
-              <label for="total-joma">Total Joma Taka<span class="text-danger">*</span> : </label>
-              <input id="total-joma" type="text" class="form-control" placeholder="enter total joma taka"/>
+              <label for="total-joma"
+                >Total Joma Taka<span class="text-danger">*</span> :
+              </label>
+              <input
+                id="total-joma"
+                type="text"
+                class="form-control"
+                placeholder="enter total joma taka"
+              />
             </div>
             <div class="my-3">
-              <label for="total-bazar">Total Bazar Khoroj<span class="text-danger">*</span> : </label>
-              <input id="total-bazar" type="text" class="form-control" placeholder="enter total bazar khoroj" />
+              <label for="total-bazar"
+                >Total Bazar Khoroj<span class="text-danger">*</span> :
+              </label>
+              <input
+                id="total-bazar"
+                type="text"
+                class="form-control"
+                placeholder="enter total bazar khoroj"
+              />
             </div>
             <div>
-              <label for="total-meal">Total Meal<span class="text-danger">*</span> : </label>
-              <input id="total-meal" type="text" class="form-control" placeholder="enter total meal"/>
+              <label for="total-meal"
+                >Total Meal<span class="text-danger">*</span> :
+              </label>
+              <input
+                id="total-meal"
+                type="text"
+                class="form-control"
+                placeholder="enter total meal"
+              />
             </div>
           </div>
-
           <div class="col mt-md-5 ps-md-5">
             <div>
-              <h6>Date & Time: <span id="set-date"></span></h6>
+              <h6>Date : <span id="set-date"></span></h6>
             </div>
             <div>
-              <h5>Taka Ase : 	৳ <span id="taka-ase">00</span> tk</h5>
+              <h5>Taka Ase : ৳ <span id="taka-ase">0</span></h5>
             </div>
             <div>
-              <h4>Meal Rate : 	৳ <span id="meal-rate">00</span> tk</h4>
+              <h4>Meal Rate : ৳ <span id="meal-rate">0</span></h4>
             </div>
           </div>
         </div>
+        <!-- Meal Rate btn -->
         <div class="text-center mt-4">
           <button onclick="mealRate()" class="btn btn-success px-4">
             Meal Rate
           </button>
         </div>
       </div>
-
+      <!-- Error Massages start -->
+      <div>
+        <h4 class="text-center text-danger my-2" id="error-meg">
+          Error !!! it's not a valid input, please try again
+        </h4>
+      </div>
+      <!-- Error Massages End -->
+      <!-- Member Info Table start -->
       <div class="my-4">
         <table class="table table-striped">
           <thead>
@@ -86,51 +111,62 @@
             </tr>             -->
           </tbody>
         </table>
+        <!-- Member Info Table End -->
+        <!-- Member Info input flied start -->
         <div class="w-75 mx-auto">
-        
-          <div class="row row-cols-1 row-cols-md-3 mt-5">
-            <div>
-              <label for="name">Name<span class="text-danger">*</span> : </label>
+          <div class="row row-cols-1 row-cols-md-3 mt-5 mx-auto">
+            <div class="col">
+              <label for="name"
+                >Name<span class="text-danger">*</span> :
+              </label>
               <input
                 type="text"
                 class="form-control"
                 id="name"
-                placeholder="enter member name" required
+                placeholder="enter member name"
+                required
               />
             </div>
-
-            <div class="my-3 my-md-0">
-              <label for="joma-taka">Joma(tk)<span class="text-danger">*</span> : </label>
+            <div class="col my-3 my-md-0">
+              <label for="joma-taka"
+                >Joma(tk)<span class="text-danger">*</span> :
+              </label>
               <input
                 type="text"
                 id="joma-taka"
                 class="form-control"
-                placeholder="enter taka joma" required
+                placeholder="enter taka joma"
+                required
               />
             </div>
-            <div>
-              <label for="meal">Meal<span class="text-danger">*</span> : </label>
+            <div class="col">
+              <label for="meal"
+                >Meal<span class="text-danger">*</span> :
+              </label>
               <input
                 type="text"
                 class="form-control"
                 id="meal"
-                placeholder="enter meal" required
+                placeholder="enter meal"
+                required
               />
             </div>
           </div>
+          <!-- Add member info btn -->
           <div class="text-center my-4">
             <button
               onclick="addMember()"
               id="add-member"
               class="btn btn-primary form-control w-50"
             >
-              Add member
+              Add member Info
             </button>
           </div>
         </div>
+        <!-- Member Info input flied end -->
       </div>
     </section>
-
+    <!-- footer section start -->
     <footer class="text-center">
       <p>
         © copyright
@@ -138,7 +174,7 @@
         <span id="year-set"></span>
       </p>
     </footer>
-
+    <!-- footer section end -->
     <!-- JavaScript Custom Link -->
     <script src="js/app.js"></script>
   </body>
